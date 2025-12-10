@@ -112,7 +112,7 @@ jobs:
           cmake ..
           make
 
-      - name: Run test "car" and capture report
+      - name: Run test "add" and capture report
         run: |
           cd build
           set -e
@@ -129,7 +129,7 @@ jobs:
 
       - name: Job summary (facultatif mais pratique)
         run: |
-          echo "### Résultat du test *car*" >> $GITHUB_STEP_SUMMARY
+          echo "### Résultat du test *add*" >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat build/report.txt >> $GITHUB_STEP_SUMMARY
