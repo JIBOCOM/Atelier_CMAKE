@@ -26,22 +26,15 @@ int main(int argc, char *argv[]){
 		r = _div(atof(a), atof(b));
 		printf("%lf",r);
 	}
-	
-	else {printf("Erreur de parametres argument 4");}
-	}
-	if(argc == 3){  // ici idea on va faire 3 argument pourque utilisateur est oblige d'enter 1 seul number
-        char* op = argv[1];
-		char* a =argv[2];
-
-		if (strcmp(op, "car") == 0) {
+	else if (strcmp(op, "car") == 0) {
 		  double r = _car(atof(a));
 		  printf("%lf",r);
-	    }
-		else {
-            printf("Erreur de parametres argument 3");
-        }
-		}
-	else {printf("Erreur de parametres");}
+	}
+	
+	
+	}
+	
+	
 	return 0;
 }
 
