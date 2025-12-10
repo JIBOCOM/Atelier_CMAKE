@@ -107,7 +107,7 @@ jobs:
 
       - name: Job summary (facultatif mais pratique)
         run: |
-          echo "### Résultat du test *add*" >> $GITHUB_STEP_SUMMARY
+          echo "### Résultat du test *car*" >> $GITHUB_STEP_SUMMARY
           echo '' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
           cat build/report.txt >> $GITHUB_STEP_SUMMARY
