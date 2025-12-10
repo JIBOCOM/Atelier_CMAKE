@@ -90,7 +90,7 @@ jobs:
           cmake ..
           make
 
-      - name: Run test "add" and capture report
+      - name: Run test "car" and capture report
         run: |
           cd build
           set -e
