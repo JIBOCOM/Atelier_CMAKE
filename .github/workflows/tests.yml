@@ -117,7 +117,7 @@ jobs:
           cd build
           set -e
           echo "== Test car 5 ==" > report.txt
-          ./calculator mul 5 5 | tee -a report.txt
+          ./calculator add 5 20 | tee -a report.txt
           echo "Exit code: $?" >> report.txt
 
       - name: Upload report as artifact
