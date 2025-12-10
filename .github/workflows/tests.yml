@@ -1,31 +1,118 @@
 name: Automatisation des tests
-on: push
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   Compilation:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
       - name: Compilation
         run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
           mkdir build
           cd build
           cmake ..
-          make
-          make test
-          ./src/calculator add 10 5
+          cmake --build .
+
   Test_Add:
-    runs-on: ubuntu-latest
     needs: Compilation
+    runs-on: ubuntu-latest
     steps:
-      - name: Test fonction add
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build
         run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
           mkdir build
           cd build
           cmake ..
-          make
-          ./src/calculator add 10 5
+          cmake --build .
+
+      - name: Test fonction add
+        working-directory: build
+        run: ./calculator add 10 5
+
+  Test_sub:
+    needs: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Test fonction sub
+        working-directory: build
+        run: ./calculator sub 10 5
+
+  Test_mul:
+    needs: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Test fonction mul
+        working-directory: build
+        run: ./calculator mul 10 5
+
+  Test_div:
+    needs: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Test fonction div
+        working-directory: build
+        run: ./calculator div 10 5
+
+  Test_car:
+    needs: Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+
+      - name: Test fonction car
+        working-directory: build
+        run: ./calculator car 5
+
+  Deployment:
+    needs: [Test_Add, Test_sub, Test_mul, Test_div, Test_car]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déploiement simulé
+        run: echo "Déploiement réussi ! Tous les tests sont passés."
