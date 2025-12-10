@@ -1,31 +1,40 @@
 name: Automatisation des tests
 on: push
+
 jobs:
-  Compilation:
+  compilation:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - name: Compilation
         run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
           mkdir build
           cd build
           cmake ..
           make
-          make test
-  Test_Add:
+
+  tests:
     runs-on: ubuntu-latest
-    needs: Compilation
+    needs: compilation
+    strategy:
+      matrix:
+        test_name: [add, sub, mul, div, car]
+
     steps:
-      - name: Test fonction add
+      - uses: actions/checkout@v3
+
+      - name: Run test ${{ matrix.test_name }}
         run: |
-          last_directory=$(basename ${{ runner.workspace }})
-          git clone https://github.com/${{ github.repository }}.git
-          cd ./$last_directory
           mkdir build
           cd build
           cmake ..
           make
-          ./src/calculator add 10 5
- 
+          ./src/calculator ${{ matrix.test_name }} 10 5
+
+  deployment:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Deployment
+        run: echo "Déploiement terminé !"
