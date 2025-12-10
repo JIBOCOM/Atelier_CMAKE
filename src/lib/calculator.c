@@ -16,8 +16,4 @@ double _div(double a, double b) {
 	return a/b;
 }
 double _car(double a) {
-	return a * a; 
-}
-
-
-	
+	return a*a;
